@@ -1,3 +1,6 @@
+#ifndef _DTGRAPH_GRAPH_TRAITS_H
+#define _DTGRAPH_GRAPH_TRAITS_H
+
 #include <list>
 #include <memory>
 #include <algorithm>
@@ -34,3 +37,5 @@ namespace dgapi {
   };
 
 } // end of dgapi namespace
+
+#endif
