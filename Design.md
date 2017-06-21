@@ -18,3 +18,22 @@ graph is just a special case, and generally discouraged for the case
 when we have large numbers of nodes (there should be a warning and
 associated memory and other checks prior to realizing the given subgraph.
 
+### Generic Graph
+
+Borrowing from both LLVM and SVF (which itself is made for LLVM based analyssi),
+we have the following class structure.
+
+We define abstract node, edge pairs as such:
+
+```typedef GenericGraph <Node,Edge> GenericDTGraphTy;```
+
+The Graph itself will contain a set of maps from the nodeID to the node, as
+well as from the decision id to the decision node, and the view id to the 
+view type.
+
+The purpose of these are:
+
+* NodeID tracks unique nodes for each decision point.
+* Decision ID allows us to map a decision to a node.
+* View ID to a view type, allowing a reference for viewing.
+
