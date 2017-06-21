@@ -11,7 +11,7 @@ typedef unsigned NodeID;
 typedef unsigned EdgeID;
 
 typedef std::pair<NodeID,NodeID> NodePair;
-typedef std::set<NodeiD> NodeSet;
+typedef std::set<NodeID> NodeSet;
 
 // end of file
 #endif

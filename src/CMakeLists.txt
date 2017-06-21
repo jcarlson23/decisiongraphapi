@@ -4,3 +4,4 @@ set(SOURCES
 	Graph.cpp)
 
 # create the library...
+add_library(DTGraph STATIC ${SOURCES})

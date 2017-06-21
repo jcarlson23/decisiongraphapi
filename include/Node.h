@@ -2,15 +2,19 @@
 #define DTGRAPH_NODE_H
 
 #include "Util/BasicTypes.h"
+#include "GenericGraph.h"
 #include <memory.h>
 #include <list>
 
 class DTNode;
 class DTEdge;
 
-typedef GenericNode<DTNode, DTEdge> GenericNodeTy;
+/*
+ * Typedef for a generic DTNode
+ */
+typedef GenericNode<DTNode, DTEdge> GenericDTNodeTy;
 
-class DTNode : public GenericNodeTy {
+class DTNode : public GenericDTNodeTy {
 
  public:
   enum DTNodeE {
@@ -20,7 +24,7 @@ class DTNode : public GenericNodeTy {
 
  public:
   // Constructor
-  DTNode(NodeID id, DTNodeE en); GenericNodeTy(id,en) {
+    DTNode(NodeID id, DTNodeE en) : GenericNode(id,en) {
 
   }
 
