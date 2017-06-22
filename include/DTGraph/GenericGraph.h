@@ -1,6 +1,8 @@
 #ifndef DTGRAPH_GENERIC_GRAPH_H
 #define DTGRAPH_GENERIC_GRAPH_H
 
+#include <list>
+#include <set>
 #include "Util/BasicTypes.h"
 
 /*
@@ -32,8 +34,17 @@ class GenericNode {
 template<class NodeTy,class EdgeTy> class GenericGraph {
  public:
   GenericGraph() {}
+  
+  typedef GenericNode<NodeTy,EdgeTy> GenericNodeTy;
+  typedef std::map<NodeTy,NodeID> NodeMapTy;
+  typedef std::map<EdgeTy,EdgeID> EdgeMapTy;
+
 
  private:
+
+  std::set<GenericNodeTy> Nodes;
+  NodeMapTy NodeMap;
+  EdgeMapTy EdgeMap;
   
 };
 
