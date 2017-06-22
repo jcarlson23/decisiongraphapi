@@ -2,12 +2,13 @@
 #define _DTGRAPH_EDGE_H
 
 #include "DTGraph/GenericGraph.h"
+#include "DTGraph/Node.h"
 #include "Util/BasicTypes.h"
 
-template <class T> class DTGraph : public GenericEdge<class NodeTy,class T> {
+template <class NodeTy, class T> class DTEdge : public GenericEdge<NodeTy, T> {
 
  public:
-  DTGraph() {
+   DTEdge(NodeTy *s, NodeTy *d, T e) : GenericEdge<NodeTy,T>(s,d,e) {
 
   }
 

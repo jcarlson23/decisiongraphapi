@@ -7,15 +7,12 @@
 #include <memory.h>
 #include <list>
 
-class DTNode;
-class DTEdge;
-
 /*
  * Typedef for a generic DTNode
  */
-typedef GenericNode<DTNode, DTEdge> GenericDTNodeTy;
 
-class DTNode : public GenericDTNodeTy {
+template<class NodeTy, class EdgeTy> 
+  class DTNode : public GenericNode<NodeTy,EdgeTy> {
 
  public:
   enum DTNodeE {
@@ -25,7 +22,7 @@ class DTNode : public GenericDTNodeTy {
 
  public:
   // Constructor
-    DTNode(NodeID id, DTNodeE en) : GenericNode(id,en) {
+   DTNode(NodeID id, DTNodeE en) : GenericNode<NodeTy,EdgeTy>(id,en) {
 
   }
 

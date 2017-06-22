@@ -13,7 +13,7 @@ template<class NodeTy,class EdgeK> class GenericEdge {
  public:
   typedef NodeTy NodeType;
   
- private:
+ protected:
   NodeTy * src;   // the source node of the edge
   NodeTy * dst;   // the destination node of the endge
 
