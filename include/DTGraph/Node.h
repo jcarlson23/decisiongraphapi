@@ -3,6 +3,7 @@
 
 #include "Util/BasicTypes.h"
 #include "DTGraph/GenericGraph.h"
+#include "DTGraph/Edge.h"
 #include <memory.h>
 #include <list>
 
