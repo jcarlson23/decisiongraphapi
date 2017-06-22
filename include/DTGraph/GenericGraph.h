@@ -26,4 +26,15 @@ class GenericNode {
 
 };
 
+/*
+ * Generic Graph
+ */
+template<class NodeTy,class EdgeTy> class GenericGraph {
+ public:
+  GenericGraph() {}
+
+ private:
+  
+};
+
 #endif

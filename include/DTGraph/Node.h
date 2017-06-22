@@ -2,7 +2,7 @@
 #define DTGRAPH_NODE_H
 
 #include "Util/BasicTypes.h"
-#include "GenericGraph.h"
+#include "DTGraph/GenericGraph.h"
 #include <memory.h>
 #include <list>
 
