@@ -37,3 +37,5 @@ The purpose of these are:
 * Decision ID allows us to map a decision to a node.
 * View ID to a view type, allowing a reference for viewing.
 
+The API uses PIMPL (Pointer to Implementation) design, making a public
+API for use with a private implementation that is hidden by the user.
