@@ -2,6 +2,8 @@ set(SOURCES
 	TestSimpleCreation.cpp
 )
 
-# link the static DTGraph library
-
 # create the executable
+add_executable(TestSimple ${SOURCES})
+
+# link the static DTGraph library
+target_link_libraries(TestSimple DTGraph)
