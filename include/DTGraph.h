@@ -12,12 +12,17 @@ template <class NodeTy,class EdgeTy> class DTGraph {
   /*
    * This is the public API
    */
+  typedef GenericGraph<NodeTy,EdgeTy> GenericGraphTy;
+
   DTGraph(void);
 
+  size_t edgeNum(void) { return gImplementation->edgeNum; }
+  size_t nodeNum(void) { return gImplementation->nodeNum; }
+
  private:
-  std::unique_ptr<GenericGraph<NodeTy,EdgeTy> > gImplementation;
+  std::unique_ptr<GenericGraphTy> gImplementation;
   
-  
+
 
 };
 
