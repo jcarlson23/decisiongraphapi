@@ -92,11 +92,12 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
  public:
   
   typedef GenericNode<NodeTy,EdgeTy> GenericNodeTy;
-  typedef std::map<NodeID,NodeTy> NodeMapTy;
-  typedef std::map<EdgeID,EdgeTy> EdgeMapTy;
+  typedef std::map<NodeID,NodeTy*> NodeMapTy;
+  typedef std::map<EdgeID,EdgeTy*> EdgeMapTy;
 
   typedef typename NodeMapTy::iterator iterator;
   typedef typename NodeMapTy::const_iterator const_iterator;
+
 
   GenericGraph() : edgeNum(0), nodeNum(0) {
     std::cout << "Created Generic Graph..." << std::endl;
@@ -105,7 +106,26 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
   virtual ~GenericGraph() {
     destroy();
   }
+  
 
+  /*
+   * iterators
+   */
+  inline iterator begin() {
+    return NodeMap.begin();
+  }
+
+  inline iterator end() {
+    return NodeMap.end();
+  }
+
+  inline const_iterator begin() const {
+    return NodeMap.begin();
+  }
+
+  inline const_iterator end() const {
+    return NodeMap.end();
+  }
 
  protected:
   void destroy() {
@@ -113,7 +133,6 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
 
   std::set<GenericNodeTy> Nodes;
   NodeMapTy NodeMap;
-  EdgeMapTy EdgeMap;
 
  public:
   size_t edgeNum;
