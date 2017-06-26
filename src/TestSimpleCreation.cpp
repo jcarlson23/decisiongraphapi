@@ -28,10 +28,6 @@ class SimpleGraph : public SimpleGraphTy {
 };
 
 
-template <> DTGraph<SimpleNode,SimpleEdge>::DTGraph() {
-  gImplementation = std::make_unique<GenericGraphTy>();
-}
-
 /*
  * Main
  */
