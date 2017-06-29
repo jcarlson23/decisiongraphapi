@@ -10,6 +10,18 @@ if(NOT DEFINED DTGRAPH_VERSION_MINOR)
        set(DTGRAPH_VERSION_MINOR 1)
 endif()
 
+# for the graphics we're going to use VTK
+find_package(VTK REQUIRED)
+
+vtk_module_config(VTK
+  vtkCommonCore
+  vtkCommonDataModel
+  vtkFiltersGeometry
+  vtkInteractionStyle
+  vtkRendering${VTK_RENDERING_BACKEND}
+)
+include(${VTK_USE_FILE})
+
 include_directories(include)
 
 add_subdirectory(src)

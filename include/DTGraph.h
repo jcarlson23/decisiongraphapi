@@ -15,9 +15,7 @@ template <class NodeTy,class EdgeTy> class DTGraph {
   typedef GenericGraph<NodeTy,EdgeTy> GenericGraphTy;
 
   DTGraph(void) {
-    std::cout << "Creating generic graph" << std::endl;
     gImplementation = std::make_unique<GenericGraphTy>();
-    std::cout << "Should have called the generic constructor." << std::endl;
   }
 
   size_t edgeNum(void) { return gImplementation->edgeNum; }

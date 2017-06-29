@@ -127,8 +127,43 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
     return NodeMap.end();
   }
 
+  inline void addGNode(NodeID id, NodeTy * node) {
+    NodeMap[id] = node;
+    nodeNum++;
+  }
+
+  inline NodeTy* getGNode(NodeID id) const {
+    const_iterator it = NodeMap.find(id);
+    assert( it != NodeMap.end() && "Node not found!");
+    return it->second;
+  }
+
+  inline bool hasGNode(NodeID id) const {
+    const_iterator it = NodeMap.find(id);
+    return it != NodeMap.end();
+  }
+
+  inline size_t getTotalNodeNum() const {
+    return nodeNum;
+  }
+
+  inline size_t getTotalEdgeNum() const {
+    return edgeNum;
+  }
+
+  // increase number of node/edge
+  inline void incNodeNum() {
+    nodeNum++;
+  }
+
+  inline void incEdgeNum() {
+    edgeNum++;
+  }
+
  protected:
   void destroy() {
+    for (iterator I = NodeMap.begin(), E = NodeMap.end(); I != E; ++I)
+      delete I->second;
   }
 
   std::set<GenericNodeTy> Nodes;
@@ -139,5 +174,6 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
   size_t nodeNum;
   
 };
+
 
 #endif
