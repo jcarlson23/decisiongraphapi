@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
   // in the z direction so it is drawn on top of the edge actor.
   vtkActor* vertActor = vtkActor::New();
   vertActor->SetMapper(vertMapper);
-  vertActor->GetProperty()->SetPointSize(5);
+  vertActor->GetProperty()->SetPointSize(15);
   vertActor->SetPosition(0, 0, 0.001);
 
   // Use a dynamic label mapper to draw the labels.  This mapper
