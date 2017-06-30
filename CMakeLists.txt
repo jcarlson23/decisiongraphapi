@@ -15,6 +15,11 @@ find_package(VTK REQUIRED)
 
 vtk_module_config(VTK
   vtkCommonCore
+  vtkFiltersSources
+  vtkIOSQL
+  vtkInfovisLayout
+  vtkIOInfovis
+  vtkViewsInfovis
   vtkCommonDataModel
   vtkFiltersGeometry
   vtkInteractionStyle
