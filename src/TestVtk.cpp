@@ -12,7 +12,64 @@ VTK_MODULE_INIT(vtkRenderingOpenGL2);
 #include "vtkStringArray.h"
 #include "vtkTree.h"
 #include "vtkViewTheme.h"
-#include "vtkGraphMapper.h"
+#include "vtkGlyph2D.h"
+#include "vtkGlyphSource2D.h"
+#include "vtkPolyData.h"
+#include "vtkSmartPointer.h"
+#include "vtkInteractorStyleRubberBand2D.h"
+#include "vtkSelection.h"
+#include "vtkSelectionNode.h"
+#include "vtkDataRepresentation.h"
+#include "vtkAnnotationLink.h"
+#include "vtkRenderedGraphRepresentation.h"
+
+class RubberBandStyle : public vtkInteractorStyleRubberBand2D {
+public:
+  static RubberBandStyle * New();
+  vtkTypeMacro(RubberBandStyle, vtkInteractorStyleRubberBand2D);
+
+  virtual void OnLeftButtonUp() override {
+    vtkInteractorStyleRubberBand2D::OnLeftButtonUp();
+    vtkSelection * selection = this->view->GetRepresentation()->GetAnnotationLink()->GetCurrentSelection();
+    vtkSelectionNode * vertices;
+    vtkSelectionNode * edges;
+    
+    if ( selection->GetNode(0)->GetFieldType() == vtkSelectionNode::VERTEX)
+      vertices = selection->GetNode(0);
+    else if ( selection->GetNode(0)->GetFieldType() == vtkSelectionNode::EDGE )
+      edges = selection->GetNode(0);
+
+    if ( selection->GetNode(1)->GetFieldType() == vtkSelectionNode::VERTEX)
+      vertices = selection->GetNode(1);
+    else if ( selection->GetNode(1)->GetFieldType() == vtkSelectionNode::EDGE )
+      edges = selection->GetNode(1);
+    
+    vtkIdTypeArray * vertexList = vtkIdTypeArray::SafeDownCast(vertices->GetSelectionList());
+    std::cout << "There are " << vertexList->GetNumberOfTuples() << " vertices selected." << std::endl;
+    
+    if ( vertexList->GetNumberOfTuples() > 0)
+      std::cout << "Vertex ID's: ";
+    for ( vtkIdType i = 0; i<vertexList->GetNumberOfTuples(); i++)
+      std::cout << vertexList->GetValue(i) << " ";
+
+    std::cout << std::endl;
+
+    vtkIdTypeArray * edgeList = vtkIdTypeArray::SafeDownCast(edges->GetSelectionList());
+    std::cout << "There are " << edgeList->GetNumberOfTuples() << " edges selected." << std::endl;
+    if ( edgeList->GetNumberOfTuples() > 0 )
+      std::cout << "Edge ID's: ";
+    for (vtkIdType i = 0; i< edgeList->GetNumberOfTuples(); i++)
+      std::cout << edgeList->GetValue(i) << " ";
+
+    std::cout << std::endl;
+
+  }
+
+  vtkGraphLayoutView * view;
+
+};
+
+vtkStandardNewMacro(RubberBandStyle);
 
 int main(int, char*[])
 {
@@ -25,9 +82,6 @@ int main(int, char*[])
   vtkIdType f = graph->AddChild(c);
   vtkIdType g = graph->AddChild(c);
   vtkIdType h = graph->AddChild(g);
-
-  vtkSmartPointer<vtkGraphMapper> mapper = vtkSmartPointer<vtkGraphMapper>::New();
-  mapper->SetVertexPointSize(24);
 
   vtkStringArray* labels = vtkStringArray::New();
   labels->SetName("Label");
@@ -52,13 +106,18 @@ int main(int, char*[])
     tree->Delete();
     return EXIT_FAILURE;
   }
-
+  
   vtkGraphLayoutView* view = vtkGraphLayoutView::New();
   view->SetRepresentationFromInput(tree);
   vtkViewTheme* theme = vtkViewTheme::CreateMellowTheme();
-  theme->SetLineWidth(10.0);
-  theme->SetPointSize(25.0);
+  theme->SetLineWidth(8.0);
+  theme->SetPointSize(10.0);
 
+  vtkSmartPointer<RubberBandStyle> style = vtkSmartPointer<RubberBandStyle>::New();
+  style->view = view;
+ 
+  view->SetInteractorStyle(style);
+  
   view->ApplyViewTheme(theme);
   theme->Delete();
   view->SetVertexColorArrayName("VertexDegree");
@@ -69,9 +128,7 @@ int main(int, char*[])
   view->EdgeLabelVisibilityOn();
   view->SetLayoutStrategyToForceDirected();
   view->SetVertexLabelFontSize(34);
-
-
-
+  view->SetGlyphType(2);
   view->ResetCamera();
   view->GetInteractor()->Start();
 
@@ -80,5 +137,6 @@ int main(int, char*[])
   tree->Delete();
   view->Delete();
 
+  
   return EXIT_SUCCESS;;
 }
