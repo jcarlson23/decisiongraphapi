@@ -67,21 +67,46 @@ class GenericNode {
   
   GEdgeSetTy InEdges;
   GEdgeSetTy OutEdges;
-  
+  std::string nodeLabel;
+
  public:
   // Constructor
   GenericNode(NodeID id, GNodeEnum en) : id(id) {
-
+    nodeLabel = "Not Labeled";
   }
+
+  inline iterator inEdgeBegin() { return InEdges.begin(); }
+  inline const_iterator inEdgeBegin() const { return InEdges.begin(); }
+  inline iterator inEdgeEnd() { return InEdges.end(); }
+  inline const_iterator inEdgesEnd() const { return InEdges.End(); }
+
+  inline iterator outEdgeBegin() { return OutEdges.begin(); }
+  inline const_iterator outEdgeBegin() const { return OutEdges.begin(); }
+  inline iterator outEdgeEnd() { return OutEdges.end(); }
+  inline const_iterator outEdgesEnd() const { return OutEdges.End(); }
 
   virtual ~GenericNode() {
     for (iterator it = InEdges.begin(), eit = InEdges.end(); it != eit; ++it )
       delete *it;
   }
 
+  virtual const char *label() {
+    return nodeLabel.c_str();
+  }
+
+  virtual void setLabel(const char *l) {
+    nodeLabel = l;
+  }
+
+  virtual void setLabel(const std::string& l) {
+    nodeLabel = l;
+  }
+
   inline NodeID getId() const {
     return id;
   }
+
+
   
 };
 

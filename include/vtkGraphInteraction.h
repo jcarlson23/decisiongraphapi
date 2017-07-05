@@ -40,13 +40,15 @@ class vtkGraphInteractionModel {
   void setGraph(DTGraph<NodeTy,EdgeTy> * g) { dGraph = g; }
   void releaseGraph(void) { dGraph = nullptr; }
   
-  vtkMutableDirectedGraph* generateVtkGraph(void) {
-    return nullptr;
+  vtkSmartPointer<vtkMutableDirectedGraph> generateVtkGraph(void) {
+    return fetchGraphRepresentation();
   }
   
 
  private:
   DTGraph<NodeTy,EdgeTy>* dGraph;
+
+  vtkSmartPointer<vtkMutableDirectedGraph> fetchGraphRepresentation(void);
 
 };
 
