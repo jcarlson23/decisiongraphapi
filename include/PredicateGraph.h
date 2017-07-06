@@ -13,20 +13,39 @@ class Direction {
   
 };
 
+
 typedef DTEdge<PredicateNode, Direction> PredicateEdgeTy;
+
 class PredicateEdge : PredicateEdgeTy {
+ public: 
+ PredicateEdge(PredicateNode* src, PredicateNode * dst, Direction k) : PredicateEdgeTy(src,dst,k) {
+    
+  }
 
 };
 
 typedef DTNode<PredicateNode,PredicateEdge> PredicateNodeTy;
 class PredicateNode : public PredicateNodeTy {
+ public:
+ PredicateNode(NodeID id, DTNode::DTNodeE en) : PredicateNodeTy(id,en)  {
+
+  }
+
 
 };
 
 typedef DTGraph<PredicateNode,PredicateEdge> PredicateGraphTy;
 class PredicateGraph : public PredicateGraphTy {
+ public:
+ PredicateGraph()  {
+
+  }
 
 };
+
+
+  
+
 
 
 // end of file
