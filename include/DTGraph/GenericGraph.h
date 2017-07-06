@@ -75,6 +75,23 @@ class GenericNode {
     nodeLabel = "Not Labeled";
   }
 
+  virtual ~GenericNode() {
+    for (iterator it = InEdges.begin(), eit = InEdges.end(); it != eit; ++it )
+      delete *it;
+    for (iterator it = OutEdges.begin(), eit = OutEdges.end(); it != eit; ++it )
+      delete *it;
+
+
+  }
+
+  void AddOutGoingEdge(EdgeTy* edge) {
+    OutEdges.emplace(edge);
+  }
+
+  void AddIncomingEdge(EdgeTy * edge) {
+    InEdges.emplace(edge);
+  }
+
   inline iterator inEdgeBegin() { return InEdges.begin(); }
   inline const_iterator inEdgeBegin() const { return InEdges.begin(); }
   inline iterator inEdgeEnd() { return InEdges.end(); }
@@ -85,20 +102,15 @@ class GenericNode {
   inline iterator outEdgeEnd() { return OutEdges.end(); }
   inline const_iterator outEdgesEnd() const { return OutEdges.End(); }
 
-  virtual ~GenericNode() {
-    for (iterator it = InEdges.begin(), eit = InEdges.end(); it != eit; ++it )
-      delete *it;
-  }
-
-  virtual const char *label() {
+  virtual const char *Label() {
     return nodeLabel.c_str();
   }
 
-  virtual void setLabel(const char *l) {
+  virtual void SetLabel(const char *l) {
     nodeLabel = l;
   }
 
-  virtual void setLabel(const std::string& l) {
+  virtual void SetLabel(const std::string& l) {
     nodeLabel = l;
   }
 

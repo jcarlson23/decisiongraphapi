@@ -18,7 +18,7 @@ vtkSmartPointer<vtkMutableDirectedGraph> vtkGraphInteractionModel<NodeTy,EdgeTy>
   for (auto dgi = dGraph->beginNode(), dge = dGraph->endNode(); dgi != dge; dgi++) {
     auto node = *dgi;
     vtkIdType idNode = directedGraph->AddVertex();
-    labels->InsertValue( idNode, dgi->label() );
+    labels->InsertValue( idNode, dgi->Label() );
 
     // for each node we want to walk down it's outgoing edges and add the destination 
     // as a child 
@@ -27,7 +27,7 @@ vtkSmartPointer<vtkMutableDirectedGraph> vtkGraphInteractionModel<NodeTy,EdgeTy>
 	  outEdgeIterStart++ ) {
       auto destination = outEdgeIterStart->getDstNode();
       vtkIdType child = directedGraph->AddChild(idNode);
-      labels->InsertValue(child, destination->label());
+      labels->InsertValue(child, destination->Label());
 
       
     }
