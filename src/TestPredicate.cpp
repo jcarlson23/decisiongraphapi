@@ -2,6 +2,11 @@
 #include "DTGraph.h"
 #include "PredicateGraph.h"
 
+/*
+ * Modify to include the DTGraph to VTK interactivity
+ */
+#include "vtkGraphInteraction.h"
+
 int main(int argc, char *argv[]) {
   
   std::cout << "Exercising simple predicate graph creation." << std::endl;
