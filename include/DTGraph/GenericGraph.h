@@ -95,12 +95,12 @@ class GenericNode {
   inline iterator inEdgeBegin() { return InEdges.begin(); }
   inline const_iterator inEdgeBegin() const { return InEdges.begin(); }
   inline iterator inEdgeEnd() { return InEdges.end(); }
-  inline const_iterator inEdgesEnd() const { return InEdges.End(); }
+  inline const_iterator inEdgeEnd() const { return InEdges.End(); }
 
   inline iterator outEdgeBegin() { return OutEdges.begin(); }
   inline const_iterator outEdgeBegin() const { return OutEdges.begin(); }
   inline iterator outEdgeEnd() { return OutEdges.end(); }
-  inline const_iterator outEdgesEnd() const { return OutEdges.End(); }
+  inline const_iterator outEdgeEnd() const { return OutEdges.End(); }
 
   virtual const char *Label() {
     return nodeLabel.c_str();
@@ -206,10 +206,10 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
   void setEdgeCount() {
     std::set<EdgeTy*> edges;
     for (iterator I = NodeMap.begin(), E = NodeMap.end(); I != E; ++I) {
-      for (auto EI = I->second->inEdgesBegin(), EE = I->second->inEdgesEnd(); EI != EE; EI++) {
+      for (auto EI = I->second->inEdgeBegin(), EE = I->second->inEdgeEnd(); EI != EE; EI++) {
 	edges.emplace( *EI );
       }
-      for (auto EI = I->outEdgesBegin(), EE = I->outEdgesEnd(); EI != EE; EI++) {
+      for (auto EI = I->second->outEdgeBegin(), EE = I->second->outEdgeEnd(); EI != EE; EI++) {
 	edges.emplace( *EI );
       }
     }
