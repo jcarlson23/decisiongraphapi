@@ -10,7 +10,13 @@
 
 class PredicateNode;
 class Direction {
-  
+ public:
+  Direction(const std::string& s) {
+    label = s;
+  }
+
+ private:
+  std::string label;
 };
 
 
@@ -37,9 +43,13 @@ class PredicateNode : public PredicateNodeTy {
 typedef DTGraph<PredicateNode,PredicateEdge> PredicateGraphTy;
 class PredicateGraph : public PredicateGraphTy {
  public:
- PredicateGraph()  {
+  PredicateGraph() : DTGraph()  {
 
   }
+
+  void AddNode( PredicateNode* node ) {
+    (this)->addGNode( node->getId(), node);
+ }
 
 };
 

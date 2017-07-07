@@ -16,7 +16,7 @@ template<class NodeTy, class EdgeTy>
 
  public:
   enum DTNodeE {
-    Branch, Result, Decision, Empty
+    Root, Branch, Result, Decision, Regular, Empty
   };
   
 
