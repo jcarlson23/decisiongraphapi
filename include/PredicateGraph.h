@@ -22,7 +22,7 @@ class Direction {
 
 typedef DTEdge<PredicateNode, Direction> PredicateEdgeTy;
 
-class PredicateEdge : PredicateEdgeTy {
+class PredicateEdge : public PredicateEdgeTy {
  public: 
  PredicateEdge(PredicateNode* src, PredicateNode * dst, Direction k) : PredicateEdgeTy(src,dst,k) {
     
@@ -49,7 +49,21 @@ class PredicateGraph : public PredicateGraphTy {
 
   void AddNode( PredicateNode* node ) {
     (this)->addGNode( node->getId(), node);
- }
+  }
+
+  void AddEdge( PredicateEdge* edge ) {
+    this->addGNode( edge->getSrcID(), edge->getSrcNode() );
+    this->addGNode( edge->getDstID(), edge->getDstNode() );
+  }
+
+  void AddEdge( PredicateNode *src, PredicateNode *dst, Direction &direction ) {
+    PredicateEdge * edge = new PredicateEdge( src, dst, direction );
+    src->AddOutGoingEdge( edge );
+    
+    this->addGNode( src->getId(), src );
+    this->addGNode( dst->getId(), dst );
+    
+  }
 
 };
 

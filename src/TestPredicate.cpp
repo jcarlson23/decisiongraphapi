@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
   std::cout << "There are " << predicateGraph->getTotalEdgeNum() << " # of edges" << std::endl;
   std::cout << "There are " << predicateGraph->getTotalNodeNum() << " # of nodes" << std::endl;
 
+  
+  
   delete predicateGraph;
 
   return 0;
