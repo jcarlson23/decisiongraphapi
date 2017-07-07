@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
   SimpleGraph * simpleGraph = new SimpleGraph;
 
   std::cout << "Created a bare bones (empty) simple graph" << std::endl;
-  std::cout << "There are " << simpleGraph->edgeNum() << " # of edges" << std::endl;
-  std::cout << "There are " << simpleGraph->nodeNum() << " # of nodes" << std::endl;
+  std::cout << "There are " << simpleGraph->edgeNum << " # of edges" << std::endl;
+  std::cout << "There are " << simpleGraph->nodeNum << " # of nodes" << std::endl;
 
   delete simpleGraph;
 
