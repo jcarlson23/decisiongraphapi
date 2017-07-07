@@ -130,7 +130,6 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
   
   typedef GenericNode<NodeTy,EdgeTy> GenericNodeTy;
   typedef std::map<NodeID,NodeTy*> NodeMapTy;
-  typedef std::map<EdgeID,EdgeTy*> EdgeMapTy;
 
   typedef typename NodeMapTy::iterator iterator;
   typedef typename NodeMapTy::const_iterator const_iterator;
@@ -184,7 +183,8 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
     return nodeNum;
   }
 
-  inline size_t getTotalEdgeNum() const {
+  inline size_t getTotalEdgeNum() {
+    setEdgeCount();
     return edgeNum;
   }
 
@@ -195,12 +195,25 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
 
   inline void incEdgeNum() {
     edgeNum++;
-  }
+  }  
 
  protected:
   void destroy() {
     for (iterator I = NodeMap.begin(), E = NodeMap.end(); I != E; ++I)
       delete I->second;
+  }
+
+  void setEdgeCount() {
+    std::set<EdgeTy*> edges;
+    for (iterator I = NodeMap.begin(), E = NodeMap.end(); I != E; ++I) {
+      for (auto EI = I->second->inEdgesBegin(), EE = I->second->inEdgesEnd(); EI != EE; EI++) {
+	edges.emplace( *EI );
+      }
+      for (auto EI = I->outEdgesBegin(), EE = I->outEdgesEnd(); EI != EE; EI++) {
+	edges.emplace( *EI );
+      }
+    }
+    edgeNum = edges.size();
   }
 
   std::set<GenericNodeTy> Nodes;

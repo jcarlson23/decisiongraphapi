@@ -26,8 +26,8 @@ int main(int argc, char *argv[]) {
   predicateGraph->AddNode( beta );
 
   std::cout << "Created a bare bones (empty) simple graph" << std::endl;
-  std::cout << "There are " << predicateGraph->edgeNum << " # of edges" << std::endl;
-  std::cout << "There are " << predicateGraph->nodeNum << " # of nodes" << std::endl;
+  std::cout << "There are " << predicateGraph->getTotalEdgeNum() << " # of edges" << std::endl;
+  std::cout << "There are " << predicateGraph->getTotalNodeNum() << " # of nodes" << std::endl;
 
   delete predicateGraph;
 
