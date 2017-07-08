@@ -165,7 +165,7 @@ template<class NodeTy,class EdgeTy> class GenericGraph {
 
   inline void addGNode(NodeID id, NodeTy * node) {
     NodeMap[id] = node;
-    nodeNum++;
+    nodeNum = NodeMap.size();
   }
 
   inline NodeTy* getGNode(NodeID id) const {
