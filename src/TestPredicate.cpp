@@ -1,8 +1,9 @@
 #include <iostream>
 #include "DTGraph.h"
 #include "PredicateGraph.h"
+#include "vtkGraphInteraction.h"
 
-								 
+
 
 /*
  * Modify to include the DTGraph to VTK interactivity
@@ -28,8 +29,14 @@ int main(int argc, char *argv[]) {
   std::cout << "There are " << predicateGraph->getTotalEdgeNum() << " # of edges" << std::endl;
   std::cout << "There are " << predicateGraph->getTotalNodeNum() << " # of nodes" << std::endl;
 
+  vtkGraphInteractionModel<PredicateNode,PredicateEdge> * interactionModel =
+    new vtkGraphInteractionModel<PredicateNode,PredicateEdge>();
+
+  interactionModel->setGraph( predicateGraph );
+  vtkSmartPointer<vtkMutableDirectedGraph> directedGraph = interactionModel->generateVtkGraph();
   
   
+  delete interactionModel;
   delete predicateGraph;
 
   return 0;
