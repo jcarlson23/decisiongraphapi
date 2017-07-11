@@ -75,9 +75,11 @@ class vtkGraphInteractionModel {
 	    outEdgeIterStart != outEdgeIterStop; 
 	    outEdgeIterStart++ ) {
 	GenericEdge<NodeTy,EdgeTy> * edge = dynamic_cast< GenericEdge<NodeTy,EdgeTy>* >(*outEdgeIterStart);
-	GenericNode<NodeTy,EdgeTy> * destination = edge->getDstNode();
-	vtkIdType child = directedGraph->AddChild(idNode);
-	labels->InsertValue(child, destination->Label());	
+	if ( edge ) {
+	  GenericNode<NodeTy,EdgeTy> * destination = edge->getDstNode();
+	  vtkIdType child = directedGraph->AddChild(idNode);
+	  labels->InsertValue(child, destination->Label());
+	}
       }
       
     } // end of for-each node in the graph...
